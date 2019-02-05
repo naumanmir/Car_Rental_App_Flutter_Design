@@ -2,6 +2,10 @@
 
 Screen Design for Car Rental application concept made in Flutter.
 
+Original design concept
+
+<img width="235" alt="screen shot 2019-02-05 at 3 08 26 pm" src="https://user-images.githubusercontent.com/29778659/52266365-0b99cb00-2958-11e9-88ed-f23dd3a5aace.png">
+
 ## Getting Started
 
 My Design Implementation
