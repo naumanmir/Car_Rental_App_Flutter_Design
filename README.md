@@ -1,6 +1,6 @@
 # car_rental_app
 
-A new Flutter application.
+Screen Design for Car Rental application concept made in Flutter.
 
 ## Getting Started
 
