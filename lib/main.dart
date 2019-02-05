@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
                       child: Icon(
                         Icons.arrow_back,
-                        color: Colors.purple,
+                        color: Colors.black,
                         size: 28,
                       ),
                     ),
@@ -79,10 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: LinearPercentIndicator(
                       padding: EdgeInsets.fromLTRB(17, 0, 20, 0),
                       fillColor: Colors.white,
-                      progressColor: Colors.purple,
+                      progressColor: Colors.blue,
                       percent: 0.05,
                       width: MediaQuery.of(context).size.width,
                       lineHeight: 3,
+                          backgroundColor: Colors.grey[200],
                     )),
                     SizedBox(
                       height: 12,
@@ -96,12 +97,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(10),
+
+                      gradient: LinearGradient(begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,colors: [Colors.blue[600],
+                      Colors.blue[500],
+                      Colors.blue,
+                      Colors.blue[400],
+                      Colors.blue[300]])),
                       margin: EdgeInsets.only(left: 12, right: 12),
+                      
                       child: MaterialButton(
                         minWidth: double.infinity,
                         padding: EdgeInsets.only(left: 12, right: 12),
-                        color: Colors.purple[200],
+
                         textColor: Colors.white,
                         child: Text(
                           "Create My Feed",
@@ -121,23 +130,23 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget buildGrid(BuildContext context) {
     return GridView.count(
-      padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
       crossAxisCount: 2,
       shrinkWrap: true,
       childAspectRatio: (MediaQuery.of(context).size.width - 60 / 2) / 300,
       children: <Widget>[
         buildTile(context, 0, "Cars", null, Icons.directions_car, "1,456 items",
-            Colors.orange[200]),
+            Colors.orange, Colors.orange[50]),
         buildTile(context, 1, "Helicopters",
-            Image.asset("assets/helicopter.png"), null, "658 items", null),
+            Image.asset("assets/helicopter.png"), null, "658 items", Colors.blue, Colors.blue[50]),
         buildTile(context, 2, "Boats", null, Icons.directions_boat, "217 items",
-            Colors.purple[200]),
+            Colors.purple, Colors.purple[50]),
         buildTile(context, 3, "Scooters", null, Icons.directions_bike,
-            "24 items", Colors.red[200]),
+            "24 items", Colors.red, Colors.red[50]),
         buildTile(context, 4, "Trucks", null, Icons.train, "7,245 items",
-            Colors.yellow[200]),
+            Colors.yellow, Colors.yellow[50]),
         buildTile(context, 5, "Planes", null, Icons.airplanemode_active,
-            "3,901 items", Colors.green[200]),
+            "3,901 items", Colors.green, Colors.green[50]),
       ],
     );
   }
@@ -146,9 +155,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget buildTile(BuildContext context, int index, String heading, Image image,
-      IconData icon, String itemCount, Color color) {
+      IconData icon, String itemCount, Color color, Color backgroundColor) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: EdgeInsets.only(left: index == 0 || index == 2 || index == 4 ? 12:5, top: 0, right: index == 1 || index == 3 || index == 5 ? 12:5, bottom: 10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: GestureDetector(
@@ -158,60 +167,65 @@ class _MyHomePageState extends State<MyHomePage> {
           });
           print("tapped");
         },
-        child: Container(
-          decoration: BoxDecoration(
-              color:
-                  _selectedIndex == index ? Colors.purple[200] : Colors.white,
-              borderRadius: BorderRadius.circular(10)),
-          child: Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                  side: BorderSide.none,
-                  borderRadius: BorderRadius.circular(10)),
-              color: Colors.white,
-              child: Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  index == 1
-                      ? IconButton(
-                          icon: image,
-                          onPressed: () {},
-                          color: Colors.red,
-                        )
-                      : Icon(
-                          icon,
-                          color: color,
-                        ),
-                  index != 1
-                      ? SizedBox(
-                          height: 4,
-                        )
-                      : SizedBox(
-                          height: 0,
-                        ),
-                  Text(
-                    heading,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    itemCount,
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300),
-                  )
-                ],
-              ))),
-        ),
+        child: Card(
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+                side: BorderSide(
+                    width: 1.0,
+                    style: BorderStyle.solid,
+                    color: _selectedIndex == index && color != null
+                        ? color
+                        : Colors.white),
+                borderRadius: BorderRadius.circular(10)),
+            color: Colors.white,
+            child: Center(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Stack(
+                  alignment: Alignment(0, 0),
+                  children: <Widget>[
+                    Container(width: 43, height: 43, decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(15)),),
+                    index == 1
+                    ? IconButton(
+                        icon: image,
+                        onPressed: () {},
+                      )
+                    : Icon(
+                        icon,
+                        color: color,
+                      ),
+                index != 1
+                    ? SizedBox(
+                        height: 4,
+                      )
+                    : SizedBox(
+                        height: 0,
+                      ),
+                  ],
+                ),
+                Text(
+                  heading,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Text(
+                  itemCount,
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300),
+                )
+              ],
+            ))),
       ),
+//      ),
     );
   }
 }
