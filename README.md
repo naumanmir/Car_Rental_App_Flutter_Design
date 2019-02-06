@@ -1,6 +1,6 @@
 # car_rental_app
 
-Screen Design for Car Rental application concept made in Flutter.
+Screen Design for Car Rental application concept made in Flutter. The concept is taken from https://www.uplabs.com/posts/car-rental-app-welcome-and-onboarding-screens
 
 Original design concept
 
