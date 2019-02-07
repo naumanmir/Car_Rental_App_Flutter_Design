@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(HomeScreen());
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(title: ''),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+//class HomeScreen extends StatelessWidget {
+//  // This widget is the root of your application.
+//  @override
+//  Widget build(BuildContext context) {
+//    return MaterialApp(
+//      title: 'Flutter Demo',
+//      theme: ThemeData(
+//        // This is the theme of your application.
+//        //
+//        // Try running your application with "flutter run". You'll see the
+//        // application has a blue toolbar. Then, without quitting the app, try
+//        // changing the primarySwatch below to Colors.green and then invoke
+//        // "hot reload" (press "r" in the console where you ran "flutter run",
+//        // or simply save your changes to "hot reload" in a Flutter IDE).
+//        // Notice that the counter didn't reset back to zero; the application
+//        // is not restarted.
+//        primarySwatch: Colors.blue,
+//      ),
+//      debugShowCheckedModeBanner: false,
+//      home: MyHomePage(title: ''),
+//    );
+//  }
+//}
+////
+class MyHomePageScreen extends StatefulWidget {
+//  MyHomePage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -39,13 +39,13 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+//  final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  HomeScreen createState() => HomeScreen();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class HomeScreen extends State<MyHomePageScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -59,13 +59,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                        size: 28,
-                      ),
-                    ),
+                        padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                            size: 28,
+                          ),
+                        )),
                     SizedBox(height: 20),
                     Container(
                         padding: EdgeInsets.fromLTRB(12, 0, 12, 0),
@@ -83,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       percent: 0.05,
                       width: MediaQuery.of(context).size.width,
                       lineHeight: 3,
-                          backgroundColor: Colors.grey[200],
+                      backgroundColor: Colors.grey[200],
                     )),
                     SizedBox(
                       height: 12,
@@ -98,19 +102,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-
-                      gradient: LinearGradient(begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,colors: [Colors.blue[600],
-                      Colors.blue[500],
-                      Colors.blue,
-                      Colors.blue[400],
-                      Colors.blue[300]])),
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                Colors.blue[600],
+                                Colors.blue[500],
+                                Colors.blue,
+                                Colors.blue[400],
+                                Colors.blue[300]
+                              ])),
                       margin: EdgeInsets.only(left: 12, right: 12),
-                      
                       child: MaterialButton(
                         minWidth: double.infinity,
                         padding: EdgeInsets.only(left: 12, right: 12),
-
                         textColor: Colors.white,
                         child: Text(
                           "Create My Feed",
@@ -137,8 +142,15 @@ class _MyHomePageState extends State<MyHomePage> {
       children: <Widget>[
         buildTile(context, 0, "Cars", null, Icons.directions_car, "1,456 items",
             Colors.orange, Colors.orange[50]),
-        buildTile(context, 1, "Helicopters",
-            Image.asset("assets/helicopter.png"), null, "658 items", Colors.blue, Colors.blue[50]),
+        buildTile(
+            context,
+            1,
+            "Helicopters",
+            Image.asset("assets/helicopter.png"),
+            null,
+            "658 items",
+            Colors.blue,
+            Colors.blue[50]),
         buildTile(context, 2, "Boats", null, Icons.directions_boat, "217 items",
             Colors.purple, Colors.purple[50]),
         buildTile(context, 3, "Scooters", null, Icons.directions_bike,
@@ -157,7 +169,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildTile(BuildContext context, int index, String heading, Image image,
       IconData icon, String itemCount, Color color, Color backgroundColor) {
     return Container(
-      padding: EdgeInsets.only(left: index == 0 || index == 2 || index == 4 ? 12:5, top: 0, right: index == 1 || index == 3 || index == 5 ? 12:5, bottom: 10),
+      padding: EdgeInsets.only(
+          left: index == 0 || index == 2 || index == 4 ? 12 : 5,
+          top: 0,
+          right: index == 1 || index == 3 || index == 5 ? 12 : 5,
+          bottom: 10),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: GestureDetector(
@@ -186,23 +202,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 Stack(
                   alignment: Alignment(0, 0),
                   children: <Widget>[
-                    Container(width: 43, height: 43, decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(15)),),
+                    Container(
+                      width: 43,
+                      height: 43,
+                      decoration: BoxDecoration(
+                          color: backgroundColor,
+                          borderRadius: BorderRadius.circular(15)),
+                    ),
                     index == 1
-                    ? IconButton(
-                        icon: image,
-                        onPressed: () {},
-                      )
-                    : Icon(
-                        icon,
-                        color: color,
-                      ),
-                index != 1
-                    ? SizedBox(
-                        height: 4,
-                      )
-                    : SizedBox(
-                        height: 0,
-                      ),
+                        ? IconButton(
+                            icon: image,
+                            onPressed: () {},
+                          )
+                        : Icon(
+                            icon,
+                            color: color,
+                          ),
+                    index != 1
+                        ? SizedBox(
+                            height: 4,
+                          )
+                        : SizedBox(
+                            height: 0,
+                          ),
                   ],
                 ),
                 Text(

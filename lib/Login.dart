@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 import 'dart:async';
+import 'package:car_rental_app/main.dart';
 
 import 'package:flutter/services.dart';
 
@@ -222,7 +223,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               "Create Account",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePageScreen()));
+                            },
                           ),
                         ),
                         Container(
